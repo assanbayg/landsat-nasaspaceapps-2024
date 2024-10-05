@@ -6,15 +6,12 @@ import Globe from "react-globe.gl";
 export const Map3D = () => {
   const globeEl = useRef();
 
-  // const [points, setPoints] = useState([]);
-
+  const altitude = 0.1;
   const [countries, setCountries] = useState({ features: [] });
-  const [altitude, setAltitude] = useState(0.1);
   const [transitionDuration, setTransitionDuration] = useState(1000);
 
   useEffect(() => {
-    // Load data
-    fetch("/data/australia.geojson")
+    fetch("/data/countries.geojson")
       .then((res) => res.json())
       .then((data) => {
         setCountries(data);
@@ -26,11 +23,9 @@ export const Map3D = () => {
   }, []);
 
   useEffect(() => {
-    // Auto-rotate
     if (globeEl.current) {
       globeEl.current.controls().autoRotate = true;
       globeEl.current.controls().autoRotateSpeed = 0.3;
-      // globeEl.current.pointOfView({ altitude: 4 }, 5000);
     }
   }, []);
 
@@ -38,27 +33,16 @@ export const Map3D = () => {
     <Globe
       ref={globeEl}
       globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
-      // all options for globe image"
-      // earth-blue-marble.jpg
-      // earth-dark.jpg
-      // earth-day.jpg
-      // earth-night.jpg
-      // earth-topology.png
-      // earth-water.png
-      // night-sky.png
-
-      // if you need some specific points instead of polygons
-      // pointsData={points}
-      // pointAltitude="size"
-      // pointColor="color"
-
-      // polygons and my favourite geojsoonnnnnn
-
+      // polygons and geojson data
       polygonsData={countries.features.filter(
         (d) => d.properties.ISO_A2 !== "AQ",
       )}
       polygonAltitude={altitude}
-      polygonCapColor={() => "rgba(200, 0, 0, 0.6)"}
+      polygonCapColor={(d) =>
+        d.properties.ISO_A2 === "AU"
+          ? "rgba(0, 100, 0, 0.6)"
+          : "rgba(200, 0, 0, 0.6)"
+      } // aussies are green, rest of the world is red
       polygonSideColor={() => "rgba(0, 100, 0, 0.15)"}
       polygonLabel={({ properties: d }) => `
         <b>${d.ADMIN} (${d.ISO_A2})</b> <br />
