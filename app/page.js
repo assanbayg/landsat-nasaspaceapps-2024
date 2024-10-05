@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <>
       <div className="flex flex-col items-center">
-        <div className="my-4 flex items-center space-x-1 text-lg">
+        {/* <div className="my-4 flex items-center space-x-1 text-lg">
           <span>2D</span>
           <label className="relative inline-flex cursor-pointer items-center">
             <input
@@ -46,9 +46,10 @@ export default function Home() {
             <div className="absolute left-0.5 top-0.5 h-5 w-5 rounded-full border border-gray-300 bg-white transition-all peer-checked:translate-x-5"></div>
           </label>
           <span>3D</span>
-        </div>
+        </div> */}
 
-        {is3DMode ? <Map3D /> : <Map2D />}
+        {/* {is3DMode ? <Map3D /> : <Map2D />} */}
+        <Map3D />
       </div>
     </>
   );
