@@ -6,7 +6,7 @@ import Globe from "react-globe.gl";
 export const Map3D = () => {
   const globeEl = useRef();
 
-  const altitude = 0.1;
+  const altitude = 0.01;
   const [countries, setCountries] = useState({ features: [] });
   const [transitionDuration, setTransitionDuration] = useState(1000);
 
@@ -32,7 +32,7 @@ export const Map3D = () => {
   return (
     <Globe
       ref={globeEl}
-      globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
+      globeImageUrl="//unpkg.com/three-globe/example/img/earth-day.jpg"
       // polygons and geojson data
       polygonsData={countries.features.filter(
         (d) => d.properties.ISO_A2 !== "AQ",
@@ -43,10 +43,11 @@ export const Map3D = () => {
           ? "rgba(0, 100, 0, 0.6)"
           : "rgba(200, 0, 0, 0.6)"
       } // aussies are green, rest of the world is red
+      // TODO: should navigate to 2d map
+      onPolygonClick={(polygon) => alert(polygon.properties.ADMIN)}
       polygonSideColor={() => "rgba(0, 100, 0, 0.15)"}
       polygonLabel={({ properties: d }) => `
-        <b>${d.ADMIN} (${d.ISO_A2})</b> <br />
-        Population: <i>${Math.round(+d.POP_EST / 1e4) / 1e2}M</i>
+        <b>${d.ADMIN}</b> <br />
       `}
       polygonsTransitionDuration={transitionDuration}
     />

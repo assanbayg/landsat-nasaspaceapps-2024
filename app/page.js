@@ -1,56 +1,48 @@
 "use client";
-import { useEffect, useState } from "react";
 
-import { Map2D } from "./components/map2d";
+import { useState } from "react";
+
 import { Map3D } from "./components/map3d";
 
 export default function Home() {
-  const [location, setLocation] = useState({ lat: null, lon: null });
-  const [error, setError] = useState(null);
-  const [is3DMode, setIs3DMode] = useState(false);
+  const [activeMenuItem, setActiveMenuItem] = useState(null);
 
-  const getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setLocation({
-            lat: position.coords.latitude,
-            lon: position.coords.longitude,
-          });
-          setError(null);
-        },
-        (err) => {
-          setError("Error retrieving location");
-        },
-      );
-    } else {
-      setError("Geolocation not supported by this browser.");
-    }
+  const handleMenuClick = (index) => {
+    setActiveMenuItem((prevIndex) => (prevIndex === index ? null : index));
   };
 
-  useEffect(getLocation, []);
-
   return (
-    <>
-      <div className="flex flex-col items-center">
-        {/* <div className="my-4 flex items-center space-x-1 text-lg">
-          <span>2D</span>
-          <label className="relative inline-flex cursor-pointer items-center">
-            <input
-              type="checkbox"
-              className="peer sr-only"
-              checked={is3DMode}
-              onChange={() => setIs3DMode(!is3DMode)}
-            />
-            <div className="peer h-6 w-11 rounded-full bg-gray-200 peer-checked:bg-blue-600 peer-focus:outline-none"></div>
-            <div className="absolute left-0.5 top-0.5 h-5 w-5 rounded-full border border-gray-300 bg-white transition-all peer-checked:translate-x-5"></div>
-          </label>
-          <span>3D</span>
-        </div> */}
-
-        {/* {is3DMode ? <Map3D /> : <Map2D />} */}
+    <div className="relative h-screen">
+      <div className="absolute left-0 top-0 z-10 h-full w-64 bg-white p-4 text-blue-500 dark:bg-gray-800 dark:text-white">
+        <h1 className="mb-4 text-2xl font-bold">Sidebar</h1>
+        <ul>
+          <li
+            className="mb-2 cursor-pointer rounded p-2"
+            onClick={() => handleMenuClick(1)}
+          >
+            Parameter 1
+            {activeMenuItem === 1 && (
+              <div className="mt-2 bg-gray-200 p-2 dark:bg-gray-700">
+                This is the content for Menu Item 1.
+              </div>
+            )}
+          </li>
+          <li
+            className="mb-2 cursor-pointer rounded p-2"
+            onClick={() => handleMenuClick(2)}
+          >
+            Parameter 2
+            {activeMenuItem === 2 && (
+              <div className="mt-2 bg-gray-200 p-2 dark:bg-gray-700">
+                This is the content for Menu Item 2.
+              </div>
+            )}
+          </li>
+        </ul>
+      </div>
+      <div className="h-full">
         <Map3D />
       </div>
-    </>
+    </div>
   );
 }
