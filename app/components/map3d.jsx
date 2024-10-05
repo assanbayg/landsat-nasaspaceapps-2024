@@ -12,12 +12,9 @@ export const Map3D = () => {
   const [transitionDuration, setTransitionDuration] = useState(1000);
 
   const handleNavigate = (polygon) => {
-    console.log(polygon);
     const country = polygon.properties.ADMIN;
-    const lat = polygon.geometry.coordinates[0][5][0];
-    const lng = polygon.geometry.coordinates[0][5][1];
 
-    router.push(`/countries/${country}?lat=${lat}&lng=${lng}`);
+    router.push(`/countries/${country}`);
   };
 
   useEffect(() => {

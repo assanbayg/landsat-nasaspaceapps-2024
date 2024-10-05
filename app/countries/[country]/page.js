@@ -1,12 +1,11 @@
 "use client";
 
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 
 import { Map2D } from "@/app/components/map2d";
 
 const CountryPage = () => {
   const { country } = useParams();
-  const searchParams = useSearchParams();
 
   return (
     <div>

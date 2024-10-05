@@ -18,13 +18,15 @@ export const Map2D = ({ country }) => {
             mapId={"11"}
             gestureHandling={"greedy"}
             colorScheme={"FOLLOW_SYSTEM"}
-            // disableDefaultUI
+            disableDefaultUI
+            mapTypeId={"satellite"}
           >
             <AdvancedMarker
               position={countriesCoordinates[country]}
               title={"Tompaq"}
             >
-              <Pin background={"#eb831c"} />
+              {/* i can put my own color in the background attribute */}
+              <Pin background={""} />
             </AdvancedMarker>
           </Map>
         </APIProvider>
