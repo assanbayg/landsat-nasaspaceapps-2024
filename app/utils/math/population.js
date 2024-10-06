@@ -1,13 +1,11 @@
-export function kangarooPopulation(T, temperatureChange) {
-  const b = Math.log(2) / (2 / T - 6 / T);
+import { all, create } from "mathjs";
 
-  const a = -0.48 / (Math.exp((2 * b) / T) - 1);
+const math = create(all, {});
 
-  function f(x, a, b) {
-    return a * Math.exp(2 * b * Math.abs(x)) - a;
-  }
+export function kangarooPopulation(temperatureChange, x) {
+  const b = -4.8;
+  const T = parseFloat(temperatureChange);
 
-  const kangarooPopulationChange = f(temperatureChange, a, b);
-
-  return kangarooPopulationChange;
+  const a = (-1 * 0.48) / (math.exp((2 * b) / T) - 1);
+  return (a * math.exp(2 * b * Math.abs((x-T)/T)) - a)/3;
 }

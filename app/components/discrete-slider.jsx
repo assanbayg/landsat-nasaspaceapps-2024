@@ -11,8 +11,8 @@ export const DiscreteSlider = ({ min = 0, max = 10, step = 1, onChange }) => {
   const maxAudioRef = useRef(null);
 
   useEffect(() => {
-    minAudioRef.current = new Audio("/sounds/sad.wav");
-    maxAudioRef.current = new Audio("/sounds/happy.wav");
+    minAudioRef.current = new Audio("/sounds/happy.wav");
+    maxAudioRef.current = new Audio("/sounds/sad.wav");
   }, []);
 
   const handleSliderChange = (e) => {
@@ -31,7 +31,7 @@ export const DiscreteSlider = ({ min = 0, max = 10, step = 1, onChange }) => {
   const percentage = ((value - min) / (max - min)) * 100;
 
   return (
-    <div className="w-48">
+    <div className="w-64">
       <input
         type="range"
         min={min}
