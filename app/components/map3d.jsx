@@ -11,10 +11,10 @@ export const Map3D = () => {
   const globeEl = useRef();
   const [countries, setCountries] = useState({ features: [] });
   const [transitionDuration, setTransitionDuration] = useState(1000);
+  const [currentChoice, setCurrentChoice] = useState("");
 
-  const handleNavigate = (polygon) => {
-    const country = polygon.properties.ADMIN;
-    router.push(`/countries/${country}`);
+  const handleNavigate = () => {
+    router.push(`/countries/${currentChoice}`);
   };
 
   useEffect(() => {
@@ -36,7 +36,16 @@ export const Map3D = () => {
   }, []);
 
   return (
-    <>
+    <div className="relative h-screen">
+      <div className="top-60 absolute left-24 z-10 flex gap-x-2">
+        <p className="text-center text-2xl text-white">{currentChoice}</p>
+        <button
+          className="w-20 rounded-xl bg-blue-500 px-2 py-1 text-center text-xl text-white"
+          onClick={handleNavigate}
+        >
+          Select
+        </button>
+      </div>
       <Globe
         ref={globeEl}
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-water.png"
@@ -47,13 +56,13 @@ export const Map3D = () => {
         polygonCapColor={(d) =>
           d.properties.ISO_A2 === "AU" ? "#5BA8AA" : "#346667"
         }
-        onPolygonClick={(polygon) => handleNavigate(polygon)}
+        onPolygonClick={(polygon) => setCurrentChoice(polygon.properties.ADMIN)}
         polygonSideColor={() => "rgba(0, 100, 0, 0.15)"}
         polygonLabel={({ properties: d }) => `
             <b>${d.ADMIN}</b>
           `}
         polygonsTransitionDuration={transitionDuration}
       />
-    </>
+    </div>
   );
 };
