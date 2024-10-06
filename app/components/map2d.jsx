@@ -13,7 +13,7 @@ export const Map2D = ({ country }) => {
       <div className="h-[600px] w-full">
         <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
           <Map
-            defaultZoom={5}
+            defaultZoom={4}
             defaultCenter={countriesCoordinates[country]}
             mapId={"11"}
             gestureHandling={"greedy"}
