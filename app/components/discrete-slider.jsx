@@ -1,14 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import "./discrete-slider.css";
 
 export const DiscreteSlider = ({ min = 0, max = 10, step = 1, onChange }) => {
   const [value, setValue] = useState(min);
 
+  const minAudioRef = useRef(null);
+  const maxAudioRef = useRef(null);
+
+  useEffect(() => {
+    // Load the sound effects (you can use your own sound file paths)
+    minAudioRef.current = new Audio("/sounds/sad.wav");
+    maxAudioRef.current = new Audio("/sounds/happy.wav");
+  }, []);
+
   const handleSliderChange = (e) => {
     const newValue = Number(e.target.value);
+
+    // Play sound if the slider reaches min or max value
+    if (newValue === min) {
+      minAudioRef.current.play();
+    } else if (newValue === max) {
+      maxAudioRef.current.play();
+    }
+
     setValue(newValue);
     onChange(newValue);
   };
