@@ -9,8 +9,8 @@ import { countriesCoordinates } from "../data/countries";
 
 export const Map2D = ({ country }) => {
   return (
-    <section id="map" className="flex w-full flex-col md:pt-16">
-      <div className="h-[600px] w-full">
+    <section id="map" className="flex w-full flex-col">
+      <div className="h-[700px] w-full">
         <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
           <Map
             defaultZoom={4}

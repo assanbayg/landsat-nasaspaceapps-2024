@@ -11,7 +11,6 @@ export const DiscreteSlider = ({ min = 0, max = 10, step = 1, onChange }) => {
   const maxAudioRef = useRef(null);
 
   useEffect(() => {
-    // Load the sound effects (you can use your own sound file paths)
     minAudioRef.current = new Audio("/sounds/sad.wav");
     maxAudioRef.current = new Audio("/sounds/happy.wav");
   }, []);
@@ -19,7 +18,6 @@ export const DiscreteSlider = ({ min = 0, max = 10, step = 1, onChange }) => {
   const handleSliderChange = (e) => {
     const newValue = Number(e.target.value);
 
-    // Play sound if the slider reaches min or max value
     if (newValue === min) {
       minAudioRef.current.play();
     } else if (newValue === max) {

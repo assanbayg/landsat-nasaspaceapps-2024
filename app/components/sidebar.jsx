@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import { H, kangarooPopulation, pressure } from "../utils/math";
+
 import { DiscreteSlider } from "./discrete-slider";
 
 export const Sidebar = () => {
